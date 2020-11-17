@@ -68,7 +68,7 @@ Produce a ".zip" file containing.
 2. IV.txt - your 128-bit IV in hexadecimal (32 hex digits with no white space).
 3. Assignment1.java - your program code file.
 4. Assignment1.class - the result of compiling the above code file, which was encrypted.
-5. Encryption.txt - Producuced by running program.
+5. Encryption.txt - Producuced by running `java Assignment1 Assignment1.class`.
 6. A declaration that this is solely your own work (except elements that are explicitly attributed to another source).
 
 
