@@ -8,7 +8,6 @@ java Assignment1 someFileToEncrypt > Encryption.txt
  ```
 
 
-
 ## Spec
 
 The aim of this assignment is to perform symmetric encryption using the block cipher AES. Before this encryption can be done, a key must be exchanged with the receiver of the message (me); this will be done using Diffie-Hellman key agreement.
@@ -40,10 +39,17 @@ In order to perform the Diffie-Hellman key exchange, you should do the following
 1. Generate a random 1023-bit integer; this will be your secret value b.
 2. Generate your public shared value B given by gb (mod p)
 3. Calculate the shared secret s given by Ab (mod p)
+4. Using the value, *s*, perform AES encrytion on the given file.
+    * **Note:** the value *s* is too large (1024 bits) to be used directly as the AES key.
+    * Use SHA-256 to generate a digest of *s* to create a 256-bit AES key, *k*.
+5. Encrypt an input binary file using AES in CBC mode with the 256-bit key k and a block size of 128-bits. The IV for this encryption will be a randomly generated 128-bit value.
 
-Now that you have the value of the shared secret s, you can use this for your AES encryption. However, it is too large (1024 bits) to be used directly as the AES key. You should therefore use SHA-256 to produce a 256-bit digest from the shared secret s, giving a 256-bit AES key k.
+#### Padding Scheme:
 
-You will then encrypt an input binary file using AES in CBC mode with the 256-bit key k and a block size of 128-bits. The IV for this encryption will be a randomly generated 128-bit value. You will use the following padding scheme (as given in lectures): if the final part of the message is less than the block size, append a 1-bit and fill the rest of the block with 0-bits; if the final part of the message is equal to the block size, then create an extra block starting with a 1-bit and fill the rest of the block with 0-bits.
+The padding scheme goes as follows:
+
+* if the final part of the message is less than the block size, append a 1-bit and fill the rest of the block with 0-bits;
+* if the final part of the message is equal to the block size, then create an extra block starting with a 1-bit and fill the rest of the block with 0-bits.
 
 ### Implementation
 
